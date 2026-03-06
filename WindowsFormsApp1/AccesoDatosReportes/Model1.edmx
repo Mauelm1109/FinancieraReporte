@@ -1,0 +1,405 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ReportesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="ClienteID" />
+          </Key>
+          <Property Name="ClienteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreCompleto" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Correo" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Telefono" Type="nvarchar" MaxLength="20" />
+          <Property Name="Direccion" Type="nvarchar" MaxLength="200" />
+          <Property Name="Garantia" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Sueldo" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClientesMorosos">
+          <Key>
+            <PropertyRef Name="ClienteMorosoID" />
+          </Key>
+          <Property Name="ClienteMorosoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClienteID" Type="int" Nullable="false" />
+          <Property Name="CantidadMoras" Type="int" Nullable="false" />
+          <Property Name="FechaRegistro" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Moras">
+          <Key>
+            <PropertyRef Name="MoraID" />
+          </Key>
+          <Property Name="MoraID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PrestamoID" Type="int" Nullable="false" />
+          <Property Name="ClienteID" Type="int" Nullable="false" />
+          <Property Name="Mes" Type="int" Nullable="false" />
+          <Property Name="MontoMora" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="FechaMora" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pagos">
+          <Key>
+            <PropertyRef Name="PagoID" />
+          </Key>
+          <Property Name="PagoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PrestamoID" Type="int" Nullable="false" />
+          <Property Name="Mes" Type="int" Nullable="false" />
+          <Property Name="MontoAnterior" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="InteresPagado" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MontoAbonado" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="NuevoSaldo" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="FechaPago" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Prestamos">
+          <Key>
+            <PropertyRef Name="PrestamoID" />
+          </Key>
+          <Property Name="PrestamoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClienteID" Type="int" Nullable="false" />
+          <Property Name="Monto" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PlazoMeses" Type="int" Nullable="false" />
+          <Property Name="TasaInteres" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="InteresGenerado" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MontoTotal" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="FechaInicio" Type="date" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__ClientesM__Clien__5812160E">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="ClientesMorosos" Type="Self.ClientesMorosos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="ClientesMorosos">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Moras__ClienteID__5441852A">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Moras" Type="Self.Moras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="Moras">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Moras__PrestamoI__534D60F1">
+          <End Role="Prestamos" Type="Self.Prestamos" Multiplicity="1" />
+          <End Role="Moras" Type="Self.Moras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prestamos">
+              <PropertyRef Name="PrestamoID" />
+            </Principal>
+            <Dependent Role="Moras">
+              <PropertyRef Name="PrestamoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pagos__PrestamoI__5070F446">
+          <End Role="Prestamos" Type="Self.Prestamos" Multiplicity="1" />
+          <End Role="Pagos" Type="Self.Pagos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prestamos">
+              <PropertyRef Name="PrestamoID" />
+            </Principal>
+            <Dependent Role="Pagos">
+              <PropertyRef Name="PrestamoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prestamos__Clien__4D94879B">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Prestamos" Type="Self.Prestamos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="Prestamos">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ReportesModelStoreContainer">
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientesMorosos" EntityType="Self.ClientesMorosos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Moras" EntityType="Self.Moras" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pagos" EntityType="Self.Pagos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prestamos" EntityType="Self.Prestamos" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ClientesM__Clien__5812160E" Association="Self.FK__ClientesM__Clien__5812160E">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="ClientesMorosos" EntitySet="ClientesMorosos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Moras__ClienteID__5441852A" Association="Self.FK__Moras__ClienteID__5441852A">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Moras" EntitySet="Moras" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Moras__PrestamoI__534D60F1" Association="Self.FK__Moras__PrestamoI__534D60F1">
+            <End Role="Prestamos" EntitySet="Prestamos" />
+            <End Role="Moras" EntitySet="Moras" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pagos__PrestamoI__5070F446" Association="Self.FK__Pagos__PrestamoI__5070F446">
+            <End Role="Prestamos" EntitySet="Prestamos" />
+            <End Role="Pagos" EntitySet="Pagos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prestamos__Clien__4D94879B" Association="Self.FK__Prestamos__Clien__4D94879B">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Prestamos" EntitySet="Prestamos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ReportesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="ClienteID" />
+          </Key>
+          <Property Name="ClienteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreCompleto" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Direccion" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Garantia" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sueldo" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="ClientesMorosos" Relationship="Self.FK__ClientesM__Clien__5812160E" FromRole="Clientes" ToRole="ClientesMorosos" />
+          <NavigationProperty Name="Moras" Relationship="Self.FK__Moras__ClienteID__5441852A" FromRole="Clientes" ToRole="Moras" />
+          <NavigationProperty Name="Prestamos" Relationship="Self.FK__Prestamos__Clien__4D94879B" FromRole="Clientes" ToRole="Prestamos" />
+        </EntityType>
+        <EntityType Name="ClientesMoroso">
+          <Key>
+            <PropertyRef Name="ClienteMorosoID" />
+          </Key>
+          <Property Name="ClienteMorosoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClienteID" Type="Int32" Nullable="false" />
+          <Property Name="CantidadMoras" Type="Int32" Nullable="false" />
+          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK__ClientesM__Clien__5812160E" FromRole="ClientesMorosos" ToRole="Clientes" />
+        </EntityType>
+        <EntityType Name="Mora">
+          <Key>
+            <PropertyRef Name="MoraID" />
+          </Key>
+          <Property Name="MoraID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PrestamoID" Type="Int32" Nullable="false" />
+          <Property Name="ClienteID" Type="Int32" Nullable="false" />
+          <Property Name="Mes" Type="Int32" Nullable="false" />
+          <Property Name="MontoMora" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="FechaMora" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK__Moras__ClienteID__5441852A" FromRole="Moras" ToRole="Clientes" />
+          <NavigationProperty Name="Prestamo" Relationship="Self.FK__Moras__PrestamoI__534D60F1" FromRole="Moras" ToRole="Prestamos" />
+        </EntityType>
+        <EntityType Name="Pago">
+          <Key>
+            <PropertyRef Name="PagoID" />
+          </Key>
+          <Property Name="PagoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PrestamoID" Type="Int32" Nullable="false" />
+          <Property Name="Mes" Type="Int32" Nullable="false" />
+          <Property Name="MontoAnterior" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="InteresPagado" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MontoAbonado" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="NuevoSaldo" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="FechaPago" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Prestamo" Relationship="Self.FK__Pagos__PrestamoI__5070F446" FromRole="Pagos" ToRole="Prestamos" />
+        </EntityType>
+        <EntityType Name="Prestamo">
+          <Key>
+            <PropertyRef Name="PrestamoID" />
+          </Key>
+          <Property Name="PrestamoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClienteID" Type="Int32" Nullable="false" />
+          <Property Name="Monto" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PlazoMeses" Type="Int32" Nullable="false" />
+          <Property Name="TasaInteres" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="InteresGenerado" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MontoTotal" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK__Prestamos__Clien__4D94879B" FromRole="Prestamos" ToRole="Clientes" />
+          <NavigationProperty Name="Moras" Relationship="Self.FK__Moras__PrestamoI__534D60F1" FromRole="Prestamos" ToRole="Moras" />
+          <NavigationProperty Name="Pagos" Relationship="Self.FK__Pagos__PrestamoI__5070F446" FromRole="Prestamos" ToRole="Pagos" />
+        </EntityType>
+        <Association Name="FK__ClientesM__Clien__5812160E">
+          <End Role="Clientes" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="ClientesMorosos" Type="Self.ClientesMoroso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="ClientesMorosos">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Moras__ClienteID__5441852A">
+          <End Role="Clientes" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Moras" Type="Self.Mora" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="Moras">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prestamos__Clien__4D94879B">
+          <End Role="Clientes" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Prestamos" Type="Self.Prestamo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="Prestamos">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Moras__PrestamoI__534D60F1">
+          <End Role="Prestamos" Type="Self.Prestamo" Multiplicity="1" />
+          <End Role="Moras" Type="Self.Mora" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prestamos">
+              <PropertyRef Name="PrestamoID" />
+            </Principal>
+            <Dependent Role="Moras">
+              <PropertyRef Name="PrestamoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pagos__PrestamoI__5070F446">
+          <End Role="Prestamos" Type="Self.Prestamo" Multiplicity="1" />
+          <End Role="Pagos" Type="Self.Pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prestamos">
+              <PropertyRef Name="PrestamoID" />
+            </Principal>
+            <Dependent Role="Pagos">
+              <PropertyRef Name="PrestamoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ReportesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clientes" EntityType="Self.Cliente" />
+          <EntitySet Name="ClientesMorosos" EntityType="Self.ClientesMoroso" />
+          <EntitySet Name="Moras" EntityType="Self.Mora" />
+          <EntitySet Name="Pagos" EntityType="Self.Pago" />
+          <EntitySet Name="Prestamos" EntityType="Self.Prestamo" />
+          <AssociationSet Name="FK__ClientesM__Clien__5812160E" Association="Self.FK__ClientesM__Clien__5812160E">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="ClientesMorosos" EntitySet="ClientesMorosos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Moras__ClienteID__5441852A" Association="Self.FK__Moras__ClienteID__5441852A">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Moras" EntitySet="Moras" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prestamos__Clien__4D94879B" Association="Self.FK__Prestamos__Clien__4D94879B">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Prestamos" EntitySet="Prestamos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Moras__PrestamoI__534D60F1" Association="Self.FK__Moras__PrestamoI__534D60F1">
+            <End Role="Prestamos" EntitySet="Prestamos" />
+            <End Role="Moras" EntitySet="Moras" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pagos__PrestamoI__5070F446" Association="Self.FK__Pagos__PrestamoI__5070F446">
+            <End Role="Prestamos" EntitySet="Prestamos" />
+            <End Role="Pagos" EntitySet="Pagos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ReportesModelStoreContainer" CdmEntityContainer="ReportesEntities">
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="ReportesModel.Cliente">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Garantia" ColumnName="Garantia" />
+                <ScalarProperty Name="Sueldo" ColumnName="Sueldo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientesMorosos">
+            <EntityTypeMapping TypeName="ReportesModel.ClientesMoroso">
+              <MappingFragment StoreEntitySet="ClientesMorosos">
+                <ScalarProperty Name="ClienteMorosoID" ColumnName="ClienteMorosoID" />
+                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+                <ScalarProperty Name="CantidadMoras" ColumnName="CantidadMoras" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Moras">
+            <EntityTypeMapping TypeName="ReportesModel.Mora">
+              <MappingFragment StoreEntitySet="Moras">
+                <ScalarProperty Name="MoraID" ColumnName="MoraID" />
+                <ScalarProperty Name="PrestamoID" ColumnName="PrestamoID" />
+                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+                <ScalarProperty Name="Mes" ColumnName="Mes" />
+                <ScalarProperty Name="MontoMora" ColumnName="MontoMora" />
+                <ScalarProperty Name="FechaMora" ColumnName="FechaMora" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pagos">
+            <EntityTypeMapping TypeName="ReportesModel.Pago">
+              <MappingFragment StoreEntitySet="Pagos">
+                <ScalarProperty Name="PagoID" ColumnName="PagoID" />
+                <ScalarProperty Name="PrestamoID" ColumnName="PrestamoID" />
+                <ScalarProperty Name="Mes" ColumnName="Mes" />
+                <ScalarProperty Name="MontoAnterior" ColumnName="MontoAnterior" />
+                <ScalarProperty Name="InteresPagado" ColumnName="InteresPagado" />
+                <ScalarProperty Name="MontoAbonado" ColumnName="MontoAbonado" />
+                <ScalarProperty Name="NuevoSaldo" ColumnName="NuevoSaldo" />
+                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prestamos">
+            <EntityTypeMapping TypeName="ReportesModel.Prestamo">
+              <MappingFragment StoreEntitySet="Prestamos">
+                <ScalarProperty Name="PrestamoID" ColumnName="PrestamoID" />
+                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="PlazoMeses" ColumnName="PlazoMeses" />
+                <ScalarProperty Name="TasaInteres" ColumnName="TasaInteres" />
+                <ScalarProperty Name="InteresGenerado" ColumnName="InteresGenerado" />
+                <ScalarProperty Name="MontoTotal" ColumnName="MontoTotal" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
