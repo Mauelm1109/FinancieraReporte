@@ -51,7 +51,7 @@
     <Compile Include="AccesoDatosReportes\Cliente.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="AccesoDatosReportes\ClientesMoroso.cs">
+    <Compile Include="AccesoDatosReportes\ClientesMorosos.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="AccesoDatosReportes\Model1.Context.cs">
@@ -75,6 +75,12 @@
     <Compile Include="AccesoDatosReportes\Pago.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="LogicaDeNegocios.Reportes\ClienteService.cs" />
+    <Compile Include="LogicaDeNegocios.Reportes\PrestamoService.cs" />
+    <Compile Include="LogicaDeNegocios.Reportes\ReporteService.cs" />
+    <Compile Include="LogicaDeNegocios.Reportes\MoraService.cs" />
+    <Compile Include="LogicaDeNegocios.Reportes\PagoService.cs" />
+    <Compile Include="LogicaDeNegocios.Reportes\AmortizaciónService.cs" />
     <Compile Include="Presentación.Reportes\Clientes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -169,6 +175,7 @@
     <None Include="AccesoDatosReportes\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </None>
+    <None Include="App.Config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -182,9 +189,7 @@
   <ItemGroup>
     <None Include="AccesoDatosReportes\App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="LogicaDeNegocios.Reportes\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\sala-vip-banco-intern-curitiba5-1529x860.jpg" />
   </ItemGroup>
@@ -199,6 +204,9 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\903174444d24a2c5575ac3bd32072d41.jpg" />
+    <None Include="Resources\ff86c3b4e9e443b950da2d1a8da7cc85.jpg" />
+    <None Include="Resources\BANCOPOPULAR.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

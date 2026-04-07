@@ -17,7 +17,7 @@ namespace WindowsFormsApp1.AccesoDatosReportes
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Cliente()
         {
-            this.ClientesMorosos = new HashSet<ClientesMoroso>();
+            this.ClientesMorosos = new HashSet<ClientesMorosos>();
             this.Moras = new HashSet<Mora>();
             this.Prestamos = new HashSet<Prestamo>();
         }
@@ -31,7 +31,7 @@ namespace WindowsFormsApp1.AccesoDatosReportes
         public decimal Sueldo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClientesMoroso> ClientesMorosos { get; set; }
+        public virtual ICollection<ClientesMorosos> ClientesMorosos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Mora> Moras { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

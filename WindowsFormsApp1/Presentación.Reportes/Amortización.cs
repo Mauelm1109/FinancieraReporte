@@ -16,5 +16,10 @@ namespace WindowsFormsApp1.Presentación.Reportes
         {
             InitializeComponent();
         }
+
+        private void Amortización_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

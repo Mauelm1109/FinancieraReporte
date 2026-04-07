@@ -12,7 +12,7 @@ namespace WindowsFormsApp1.AccesoDatosReportes
     using System;
     using System.Collections.Generic;
     
-    public partial class ClientesMoroso
+    public partial class ClientesMorosos
     {
         public int ClienteMorosoID { get; set; }
         public int ClienteID { get; set; }

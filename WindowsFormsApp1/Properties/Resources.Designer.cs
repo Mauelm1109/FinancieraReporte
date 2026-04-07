@@ -63,6 +63,36 @@ namespace WindowsFormsApp1.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _903174444d24a2c5575ac3bd32072d41 {
+            get {
+                object obj = ResourceManager.GetObject("903174444d24a2c5575ac3bd32072d41", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap BANCOPOPULAR {
+            get {
+                object obj = ResourceManager.GetObject("BANCOPOPULAR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ff86c3b4e9e443b950da2d1a8da7cc85 {
+            get {
+                object obj = ResourceManager.GetObject("ff86c3b4e9e443b950da2d1a8da7cc85", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap sala_vip_banco_intern_curitiba5_1529x860 {
             get {
                 object obj = ResourceManager.GetObject("sala-vip-banco-intern-curitiba5-1529x860", resourceCulture);

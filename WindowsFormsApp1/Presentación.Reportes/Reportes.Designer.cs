@@ -106,6 +106,7 @@
             this.Name = "Reportes";
             this.Opacity = 0.8D;
             this.Text = "ReportesForm";
+            this.Load += new System.EventHandler(this.Reportes_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

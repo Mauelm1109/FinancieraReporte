@@ -16,5 +16,10 @@ namespace WindowsFormsApp1.Presentación.Reportes
         {
             InitializeComponent();
         }
+
+        private void Pagos_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

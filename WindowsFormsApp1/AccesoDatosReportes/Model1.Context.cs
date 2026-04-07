@@ -26,7 +26,7 @@ namespace WindowsFormsApp1.AccesoDatosReportes
         }
     
         public virtual DbSet<Cliente> Clientes { get; set; }
-        public virtual DbSet<ClientesMoroso> ClientesMorosos { get; set; }
+        public virtual DbSet<ClientesMorosos> ClientesMorosos { get; set; }
         public virtual DbSet<Mora> Moras { get; set; }
         public virtual DbSet<Pago> Pagos { get; set; }
         public virtual DbSet<Prestamo> Prestamos { get; set; }

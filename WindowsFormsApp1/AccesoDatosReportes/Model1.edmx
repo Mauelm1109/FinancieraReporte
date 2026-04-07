@@ -170,7 +170,7 @@
           <NavigationProperty Name="Moras" Relationship="Self.FK__Moras__ClienteID__5441852A" FromRole="Clientes" ToRole="Moras" />
           <NavigationProperty Name="Prestamos" Relationship="Self.FK__Prestamos__Clien__4D94879B" FromRole="Clientes" ToRole="Prestamos" />
         </EntityType>
-        <EntityType Name="ClientesMoroso">
+        <EntityType Name="ClientesMorosos">
           <Key>
             <PropertyRef Name="ClienteMorosoID" />
           </Key>
@@ -225,7 +225,7 @@
         </EntityType>
         <Association Name="FK__ClientesM__Clien__5812160E">
           <End Role="Clientes" Type="Self.Cliente" Multiplicity="1" />
-          <End Role="ClientesMorosos" Type="Self.ClientesMoroso" Multiplicity="*" />
+          <End Role="ClientesMorosos" Type="ReportesModel.ClientesMorosos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Clientes">
               <PropertyRef Name="ClienteID" />
@@ -285,7 +285,7 @@
         </Association>
         <EntityContainer Name="ReportesEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Clientes" EntityType="Self.Cliente" />
-          <EntitySet Name="ClientesMorosos" EntityType="Self.ClientesMoroso" />
+          <EntitySet Name="ClientesMorosos" EntityType="ReportesModel.ClientesMorosos" />
           <EntitySet Name="Moras" EntityType="Self.Mora" />
           <EntitySet Name="Pagos" EntityType="Self.Pago" />
           <EntitySet Name="Prestamos" EntityType="Self.Prestamo" />
@@ -330,7 +330,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ClientesMorosos">
-            <EntityTypeMapping TypeName="ReportesModel.ClientesMoroso">
+            <EntityTypeMapping TypeName="ReportesModel.ClientesMorosos">
               <MappingFragment StoreEntitySet="ClientesMorosos">
                 <ScalarProperty Name="ClienteMorosoID" ColumnName="ClienteMorosoID" />
                 <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />

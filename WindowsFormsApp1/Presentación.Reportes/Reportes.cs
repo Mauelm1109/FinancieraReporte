@@ -21,5 +21,11 @@ namespace WindowsFormsApp1.Presentación.Reportes
         {
             
         }
+
+        private void Reportes_Load(object sender, EventArgs e)
+        {
+
+
+        }
     }
 }
