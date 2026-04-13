@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a014a3bbc3da4353bb2f60f603044c86" Name="Diagram1" ZoomLevel="72">
+        <EntityTypeShape EntityType="ReportesModel.Amortizacion" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReportesModel.Cliente" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReportesModel.ClientesMoroso" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReportesModel.Mora" Width="1.5" PointX="5.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReportesModel.Pago" Width="1.5" PointX="5.25" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReportesModel.Prestamo" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
+        <AssociationConnector Association="ReportesModel.FK_Amortizacion_Prestamo" ManuallyRouted="false" />
+        <AssociationConnector Association="ReportesModel.FK__ClientesM__Clien__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="ReportesModel.FK__Moras__ClienteID__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="ReportesModel.FK__Prestamos__Clien__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="ReportesModel.FK__Moras__PrestamoI__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="ReportesModel.FK__Pagos__PrestamoI__5070F446" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
